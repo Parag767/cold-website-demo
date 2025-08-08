@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>White COLD Tee – COLD</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="logo">COLD</div>
+    <nav class="main-nav">
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html" id="cart-icon">Cart 🛒 (0)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Product Detail Section -->
+  <section class="product-detail">
+    <div class="product-image">
+      <img src="anya white TEE.jpg" alt="White COLD Tee" />
+    </div>
+
+    <div class="product-info" 
+         data-name="White COLD Tee"
+         data-price="999"
+         data-image="anya white TEE.jpg">
+      <h1>White COLD Tee</h1>
+      <p class="product-price">₹999</p>
+      <p class="product-description">Crisp. Bold. Clean. The White Tee from COLD makes a powerful statement in subtle fashion. Drop limited.</p>
+
+      <div class="size-select">
+        <label>Select Size:</label>
+        <button>S</button>
+        <button>M</button>
+        <button>L</button>
+        <button>XL</button>
+      </div>
+
+      <button class="btn add-to-cart">Add to Cart</button>
+      <button class="btn buy-now">Buy Now</button>
+      <a href="shop.html" class="back-link">← Back to Shop</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 COLD. All rights reserved.</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Mobile nav toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Add to Cart Logic
+    const productInfo = document.querySelector(".product-info");
+    const name = productInfo.dataset.name;
+    const price = parseInt(productInfo.dataset.price);
+    const image = productInfo.dataset.image;
+
+    document.querySelector(".add-to-cart").addEventListener("click", () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+      updateCartCount();
+    });
+
+    // Buy Now Logic
+    document.querySelector(".buy-now").addEventListener("click", () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.location.href = "checkout.html";
+    });
+
+    // Cart Count Update
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartIcon = document.getElementById("cart-icon");
+      if (cartIcon) {
+        cartIcon.textContent = `Cart 🛒 (${cart.length})`;
+      }
+    }
+
+    updateCartCount();
+  </script>
+  <script>
+  // Make size buttons selectable
+  const sizeButtons = document.querySelectorAll(".size-select button");
+  let selectedSize = null;
+
+  sizeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      sizeButtons.forEach(btn => btn.classList.remove("selected"));
+      button.classList.add("selected");
+      selectedSize = button.textContent;
+    });
+  });
+
+  // Modify Add to Cart to include size
+  document.querySelector(".add-to-cart").addEventListener("click", () => {
+    const productInfo = document.querySelector(".product-info");
+    const name = productInfo.dataset.name;
+    const price = parseInt(productInfo.dataset.price);
+    const image = productInfo.dataset.image;
+
+    if (!selectedSize) {
+      alert("Please select a size before adding to cart.");
+      return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name, price, image, size: selectedSize });
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(`${name} (${selectedSize}) added to cart!`);
+    updateCartCount();
+  });
+</script>
+
+</body>
+</html>
+

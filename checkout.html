@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout – COLD</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">COLD</div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="cart.html" id="cart-icon">Cart 🛒</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="checkout-container" style="max-width: 800px; margin: auto; padding: 2rem;">
+    <h1>Checkout</h1>
+
+    <form action="https://formspree.io/f/myzpbqpr" method="POST" id="checkout-form" class="checkout-form">
+      <label>
+        Full Name:
+        <input type="text" name="name" id="name" required />
+      </label>
+      <label>
+        Email:
+        <input type="email" name="email" id="email" required />
+      </label>
+      <label>
+        Address:
+        <textarea name="address" id="address" required></textarea>
+      </label>
+      <label>
+        Payment Method:
+        <select name="payment" id="payment" required>
+          <option value="">Select</option>
+          <option value="cod">Cash on Delivery</option>
+          <option value="upi">UPI</option>
+          <option value="card">Credit/Debit Card</option>
+        </select>
+      </label>
+
+      <!-- Hidden fields populated by JS -->
+      <input type="hidden" name="items" id="formItems" />
+      <input type="hidden" name="sizes" id="formSizes" />
+      <input type="hidden" name="quantities" id="formQuantities" />
+      <input type="hidden" name="total" id="formTotal" />
+      <input type="hidden" name="_next" value="C:/Users/parag/cold-website/Thank-you.html" />
+      <input type="hidden" name="_captcha" value="false" />
+
+      <h2>Order Summary</h2>
+      <div id="order-summary" style="margin-top: 1rem;"></div>
+      <p id="total-price" style="font-weight: bold;"></p>
+
+      <button type="submit" class="place-order-btn">Place Order</button>
+    </form>
+  </main>
+
+  <script>
+    function renderOrderSummary() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const summaryDiv = document.getElementById("order-summary");
+      const totalPriceDisplay = document.getElementById("total-price");
+      let total = 0;
+
+      if (cart.length === 0) {
+        summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
+        totalPriceDisplay.textContent = "";
+        return;
+      }
+
+      let summaryHTML = "";
+      const names = [];
+      const sizes = [];
+      const quantities = [];
+
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        names.push(item.name);
+        sizes.push(item.size);
+        quantities.push(item.quantity);
+
+        summaryHTML += `<div style="margin-bottom: 10px;">
+          ${item.name} (Size: ${item.size}) x ${item.quantity} – ₹${subtotal}
+        </div>`;
+      });
+
+      summaryDiv.innerHTML = summaryHTML;
+      totalPriceDisplay.textContent = `Total: ₹${total}`;
+
+      // Populate hidden fields
+      document.getElementById("formItems").value = names.join(', ');
+      document.getElementById("formSizes").value = sizes.join(', ');
+      document.getElementById("formQuantities").value = quantities.join(', ');
+      document.getElementById("formTotal").value = total;
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartIcon = document.getElementById("cart-icon");
+      if (cartIcon) {
+        cartIcon.textContent = `Cart 🛒 (${cart.length})`;
+      }
+    }
+
+    // Don't clear cart here — it's now handled in thank-you.html
+    renderOrderSummary();
+    updateCartCount();
+  </script>
+</body>
+</html>

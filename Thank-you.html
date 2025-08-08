@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You – COLD</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">COLD</div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="cart.html" id="cart-icon">Cart 🛒</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="thankyou-container" style="text-align: center; padding: 3rem 1rem;">
+    <h1 style="font-size: 2.5rem;">🎉 Thank You for Your Order!</h1>
+    <p style="font-size: 1.2rem; margin-top: 1rem;">We’ll notify you once your order is shipped.</p>
+    <p style="margin-top: 1rem;">Follow us on Instagram <strong>@coldwear.co</strong> for the latest drops.</p>
+
+    <a href="index.html" class="btn" style="margin-top: 2rem; display: inline-block;">Return Home</a>
+  </main>
+
+  <script>
+    // ✅ CLEAR THE CART WHEN LANDING HERE
+    localStorage.removeItem("cart");
+
+    // ✅ UPDATE CART ICON
+    const cartIcon = document.getElementById("cart-icon");
+    if (cartIcon) {
+      cartIcon.textContent = `Cart 🛒 (0)`;
+    }
+  </script>
+</body>
+</html>
+

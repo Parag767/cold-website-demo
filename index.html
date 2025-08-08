@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COLD – Gymwear</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="main-header">
+    <div class="logo">COLD</div>
+    <nav class="main-nav">
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="cart.html" id="cart-icon">Cart 🛒</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="nav-search">
+    <input type="text" id="search-input" placeholder="Search our products..." />
+    <button class="search-btn">🔍</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Crafted for the Cold.<br>Worn by the Relentless.</h1>
+    <a href="shop.html" class="cta-btn">Shop Now</a>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured-products">
+    <h2>Featured Drops</h2>
+    <div class="product-grid">
+      <div class="product-card" data-name="black cold tee anya black">
+        <div class="tag-badge">LIMITED DROP</div>
+        <img src="anya black TEE.jpg" alt="Black COLD Tee" />
+        <h3>Black COLD Tee</h3>
+        <p>₹999</p>
+        <div class="product-buttons">
+          <a href="#" class="btn buy-now">Buy Now</a>
+          <a href="product-black.html" class="btn view-details">View Details</a>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="white cold tee anya white">
+        <div class="tag-badge">LIMITED DROP</div>
+        <img src="anya white TEE.jpg" alt="White COLD Tee" />
+        <h3>White COLD Tee</h3>
+        <p>₹999</p>
+        <div class="product-buttons">
+          <a href="#" class="btn buy-now">Buy Now</a>
+          <a href="product-white.html" class="btn view-details">View Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Athletes Preview -->
+  <section class="athlete-preview">
+    <h2>The Movement</h2>
+    <button class="join-btn">JOIN US</button>
+  </section>
+
+  <!-- About Teaser -->
+  <section class="about-teaser">
+    <p>We’re more than apparel. We’re COLD.</p>
+    <a href="about.html">Read Our Story</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 COLD. All rights reserved.</p>
+  </footer>
+
+  <!-- JS for Toggle Menu -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+  <!-- Dynamic Cart Count -->
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartIcon = document.getElementById("cart-icon");
+      if (cartIcon) {
+        cartIcon.textContent = `Cart 🛒 (${cart.length})`;
+      }
+    }
+    updateCartCount();
+  </script>
+
+</body>
+</html>

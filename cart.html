@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart – COLD</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .quantity-controls button {
+      padding: 2px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+
+    .cart-item img {
+      width: 80px;
+    }
+
+    .cart-summary {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">COLD</div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html" id="cart-icon">Cart 🛒 (0)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="cart-container">
+    <h1>Your Cart</h1>
+    <div id="cart-items" class="cart-items"></div>
+
+    <div class="cart-summary">
+      <p>Total: ₹<span id="cart-total">0</span></p>
+      <button onclick="clearCart()" class="clear-cart-btn">Clear Cart</button>
+      <a href="checkout.html" id="checkout-btn" class="checkout-btn" style="display: none;">
+        <button>Proceed to Checkout</button>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartIcon = document.getElementById("cart-icon");
+      cartIcon.textContent = `Cart 🛒 (${cart.length})`;
+    }
+
+    function displayCart() {
+      const cartItemsContainer = document.getElementById("cart-items");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cartItemsContainer.innerHTML = "";
+
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+        checkoutBtn.style.display = "none";
+      } else {
+        checkoutBtn.style.display = "inline-block";
+
+        cart.forEach((item, index) => {
+          // Default quantity = 1 if not set
+          if (!item.quantity) item.quantity = 1;
+
+          const itemDiv = document.createElement("div");
+          itemDiv.classList.add("cart-item");
+
+          itemDiv.innerHTML = `
+  <img src="${item.image}" alt="${item.name}" width="80" />
+  <div>
+    <h3>${item.name}</h3>
+    <p>Size: ${item.size || 'N/A'}</p>
+    <p>Price: ₹${item.price}</p>
+    <div class="quantity-controls">
+      <button onclick="changeQuantity(${index}, -1)">➖</button>
+      <span>${item.quantity || 1}</span>
+      <button onclick="changeQuantity(${index}, 1)">➕</button>
+    </div>
+    <button onclick="removeItem(${index})">Remove</button>
+  </div>
+`;
+
+          cartItemsContainer.appendChild(itemDiv);
+          total += item.price * item.quantity;
+        });
+      }
+
+      document.getElementById("cart-total").textContent = total;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    function changeQuantity(index, delta) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (!cart[index].quantity) cart[index].quantity = 1;
+
+      cart[index].quantity += delta;
+
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      displayCart();
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      displayCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      displayCart();
+    }
+
+    displayCart();
+  </script>
+</body>
+</html>
