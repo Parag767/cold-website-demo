@@ -1,9 +1,20 @@
 /* Reset & Base */
+:root {
+  --bg: #121212;
+  --surface: #181818;
+  --surface-2: #1f1f1f;
+  --surface-3: #2a2a2a;
+  --border: #2e2e2e;
+  --text: #f2f2f2;
+  --text-muted: #b5b5b5;
+  --accent: #e5e5e5;
+  --accent-hover: #cfcfcf;
+}
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #111;
-  color: #fff;
+  background-color: var(--bg);
+  color: var(--text);
   scroll-behavior: smooth;
 }
 
@@ -22,11 +33,11 @@ h1, h2, h3, p {
   justify-content: space-between;
   align-items: center;
   padding: 15px 25px;
-  background: #000;
+  background: var(--surface);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--border);
 }
 
 .logo {
@@ -66,8 +77,8 @@ h1, h2, h3, p {
 }
 
 .main-nav a:hover {
-  color: #000;
-  background-color: #fff;
+  color: #111;
+  background-color: var(--accent);
 }
 
 .menu-toggle {
@@ -99,7 +110,7 @@ h1, h2, h3, p {
   display: flex;
   justify-content: center;
   padding: 15px;
-  background-color: #000;
+  background-color: var(--surface);
 }
 
 .nav-search input {
@@ -111,10 +122,10 @@ h1, h2, h3, p {
 
 .nav-search .search-btn {
   padding: 8px 12px;
-  background-color: #fff;
+  background-color: var(--accent);
   border: 1px solid #555;
   border-left: none;
-  color: #000;
+  color: #111;
   cursor: pointer;
   border-radius: 0 4px 4px 0;
   font-weight: bold;
@@ -124,7 +135,7 @@ h1, h2, h3, p {
 .hero {
   text-align: center;
   padding: 80px 20px;
-  background: url('hero-bg.jpg') center/cover no-repeat;
+  background: linear-gradient(180deg, #101010 0%, #262626 100%);
   color: #fff;
   border-bottom: 1px solid #222;
 }
@@ -138,8 +149,8 @@ h1, h2, h3, p {
 
 .cta-btn {
   padding: 12px 28px;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--accent);
+  color: #111;
   font-weight: bold;
   border-radius: 30px;
   transition: background 0.3s;
@@ -147,7 +158,7 @@ h1, h2, h3, p {
 }
 
 .cta-btn:hover {
-  background-color: #ddd;
+  background-color: var(--accent-hover);
 }
 
 /* Featured Products */
@@ -171,7 +182,7 @@ h1, h2, h3, p {
 }
 
 .product-card {
-  background-color: #1a1a1a;
+  background-color: var(--surface-2);
   border-radius: 12px;
   padding: 20px;
   text-align: center;
@@ -214,20 +225,28 @@ h1, h2, h3, p {
   padding: 10px 20px;
   border-radius: 20px;
   font-weight: bold;
-  background: #fff;
-  color: #000;
+  background: var(--accent);
+  color: #111;
   transition: 0.3s;
 }
 
 .btn:hover {
-  background: #ccc;
+  background: var(--accent-hover);
+}
+
+/* Disabled buttons */
+.btn:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(10%);
 }
 
 /* Athlete Section */
 .athlete-preview {
   text-align: center;
   padding: 60px 20px;
-  background: #111;
+  background: var(--surface);
 }
 
 .athlete-preview h2 {
@@ -238,8 +257,8 @@ h1, h2, h3, p {
 
 .join-btn {
   padding: 10px 24px;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--accent);
+  color: #111;
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -247,7 +266,7 @@ h1, h2, h3, p {
 }
 
 .join-btn:hover {
-  background-color: #ccc;
+  background-color: var(--accent-hover);
 }
 
 /* About Section */
@@ -255,8 +274,8 @@ h1, h2, h3, p {
   text-align: center;
   padding: 40px 20px;
   font-size: 1.1rem;
-  background: #000;
-  border-top: 1px solid #333;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
 }
 
 .about-teaser a {
@@ -269,12 +288,12 @@ h1, h2, h3, p {
 
 /* Footer */
 footer {
-  background-color: #000;
+  background-color: var(--surface);
   padding: 20px;
   text-align: center;
   font-size: 14px;
-  color: #888;
-  border-top: 1px solid #222;
+  color: #9a9a9a;
+  border-top: 1px solid var(--border);
 }
 
 /* Product Detail Page */
@@ -325,7 +344,7 @@ footer {
 .size-select button {
   margin-right: 10px;
   padding: 8px 14px;
-  background: #000;
+  background: var(--surface-3);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -333,14 +352,14 @@ footer {
 }
 
 .size-select button:hover {
-  background: #444;
+  background: #3a3a3a;
 }
 
 .add-to-cart {
   display: inline-block;
   padding: 10px 20px;
   margin-top: 20px;
-  background: #000;
+  background: var(--surface-3);
   color: #fff;
   border: none;
   font-weight: bold;
@@ -349,7 +368,7 @@ footer {
 }
 
 .add-to-cart:hover {
-  background: #222;
+  background: #3a3a3a;
 }
 
 .back-link {
@@ -454,7 +473,7 @@ footer {
 }
 
 .product-card {
-  background: #fff;
+  background: #f2f2f2;
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -488,7 +507,7 @@ footer {
   margin-top: 0.75rem;
   padding: 0.6rem 1.2rem;
   border: none;
-  background-color: #000;
+  background-color: #2a2a2a;
   color: #fff;
   font-weight: 500;
   border-radius: 0.5rem;
@@ -497,10 +516,10 @@ footer {
 }
 
 .product-card button:hover {
-  background-color: #333;
+  background-color: #3a3a3a;
 }
 .checkout-btn button {
-  background-color: black;
+  background-color: #2a2a2a;
   color: white;
   padding: 10px 20px;
   margin-top: 10px;
@@ -531,7 +550,7 @@ footer {
 
 .place-order-btn {
   padding: 12px;
-  background-color: black;
+  background-color: #2a2a2a;
   color: white;
   font-weight: bold;
   border: none;
@@ -539,12 +558,12 @@ footer {
   cursor: pointer;
 }
 .size-select button.selected {
-  background-color: black;
+  background-color: #2a2a2a;
   color: white;
-  border: 2px solid black;
+  border: 2px solid #444;
 }
 .size-select button.selected {
-  background-color: black;
+  background-color: #2a2a2a;
   color: white;
 }
 .quantity-controls {

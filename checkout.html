@@ -5,6 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout – COLD</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .modal {
+      background: var(--surface-2, #ffffff);
+      color: var(--text, #111);
+      border: 1px solid var(--border, #e5e5e5);
+      border-radius: 12px;
+      padding: 24px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .modal h2 { margin: 0 0 8px 0; }
+    .modal p { margin: 0 0 16px 0; color: var(--text-muted, #555); }
+  </style>
 </head>
 <body>
   <header class="main-header">
@@ -49,7 +74,7 @@
       <input type="hidden" name="sizes" id="formSizes" />
       <input type="hidden" name="quantities" id="formQuantities" />
       <input type="hidden" name="total" id="formTotal" />
-      <input type="hidden" name="_next" value="C:/Users/parag/cold-website/Thank-you.html" />
+      <input type="hidden" name="_next" value="Thank-you.html" />
       <input type="hidden" name="_captcha" value="false" />
 
       <h2>Order Summary</h2>
@@ -59,6 +84,15 @@
       <button type="submit" class="place-order-btn">Place Order</button>
     </form>
   </main>
+
+  <!-- Thank You Modal -->
+  <div id="thankyou-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="ty-title" aria-describedby="ty-desc">
+    <div class="modal">
+      <h2 id="ty-title">🎉 Thank you for your order!</h2>
+      <p id="ty-desc">Your order has been placed successfully.</p>
+      <a href="index.html" class="btn" style="margin-top:8px; display:inline-block;">Continue Shopping</a>
+    </div>
+  </div>
 
   <script>
     function renderOrderSummary() {
@@ -79,15 +113,17 @@
       const quantities = [];
 
       cart.forEach(item => {
-        const subtotal = item.price * item.quantity;
+        const quantity = item.quantity || 1;
+        const size = item.size || 'N/A';
+        const subtotal = item.price * quantity;
         total += subtotal;
 
         names.push(item.name);
-        sizes.push(item.size);
-        quantities.push(item.quantity);
+        sizes.push(size);
+        quantities.push(quantity);
 
         summaryHTML += `<div style="margin-bottom: 10px;">
-          ${item.name} (Size: ${item.size}) x ${item.quantity} – ₹${subtotal}
+          ${item.name} (Size: ${size}) x ${quantity} – ₹${subtotal}
         </div>`;
       });
 
@@ -104,14 +140,72 @@
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       const cartIcon = document.getElementById("cart-icon");
+      const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
       if (cartIcon) {
-        cartIcon.textContent = `Cart 🛒 (${cart.length})`;
+        cartIcon.textContent = `Cart 🛒 (${totalQuantity})`;
       }
     }
 
     // Don't clear cart here — it's now handled in thank-you.html
     renderOrderSummary();
     updateCartCount();
+
+    // Intercept form submission and submit via fetch to Formspree
+    const checkoutForm = document.getElementById('checkout-form');
+    const thankyouOverlay = document.getElementById('thankyou-overlay');
+
+    function fallbackSubmit() {
+      // Remove handler to avoid recursion and submit normally
+      checkoutForm.removeEventListener('submit', handleSubmit);
+      checkoutForm.submit();
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+
+      // If opened from file:// origin, many services block CORS. Fallback to normal submit.
+      if (window.location.protocol === 'file:') {
+        fallbackSubmit();
+        return;
+      }
+
+      const submitBtn = checkoutForm.querySelector('.place-order-btn');
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Placing order...';
+
+      try {
+        const formData = new FormData(checkoutForm);
+        const response = await fetch(checkoutForm.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'cors',
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          // Show custom thank-you overlay
+          thankyouOverlay.style.display = 'flex';
+          // Clear cart locally and update badge immediately
+          localStorage.removeItem('cart');
+          updateCartCount();
+          // Redirect to Thank-you page after a short delay
+          setTimeout(() => { window.location.href = 'Thank-you.html'; }, 1400);
+        } else {
+          // If server returns non-OK (e.g., CORS/validation), fall back to normal submit
+          fallbackSubmit();
+        }
+      } catch (err) {
+        // On network errors, fall back to normal submit to ensure order still goes through
+        fallbackSubmit();
+      } finally {
+        // In AJAX path we may redirect; in fallback path, page will navigate away
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    }
+
+    checkoutForm.addEventListener('submit', handleSubmit);
   </script>
 </body>
 </html>

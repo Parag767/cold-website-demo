@@ -2,13 +2,429 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>White COLD Tee – COLD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop – COLD</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Shop Page - Matching Home Page Vibe */
+    .shop-hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(180deg, #101010 0%, #262626 100%);
+      color: #fff;
+      border-bottom: 1px solid #222;
+    }
+
+    .shop-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #000;
+      letter-spacing: 1px;
+    }
+
+    .shop-hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .shop-controls {
+      padding: 40px 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .controls-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .search-section {
+      flex: 1 1 420px;
+      min-width: 260px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      background: var(--surface-2);
+      color: var(--text);
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .filter-section {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex: 1 1 340px;
+      min-width: 260px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .filter-select option {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .products-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .products-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .products-count {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: var(--surface-2);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 10px #000;
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      background: var(--surface-3);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .product-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+
+    .quick-view-btn {
+      background: var(--accent);
+      color: #111;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .quick-view-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      background: var(--accent);
+      color: #111;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      flex: 1;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--surface-2);
+      border-radius: 12px;
+    }
+
+    .no-results-icon {
+      font-size: 3rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .no-results-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 15px;
+    }
+
+    .no-results-text {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+    }
+
+    .clear-search-btn {
+      background: var(--accent);
+      color: #111;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .clear-search-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .load-more {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .load-more-btn {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .load-more-btn:hover {
+      background: var(--accent);
+      color: #111;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+      .controls-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+      }
+      .filter-section {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .shop-hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .shop-controls {
+        padding: 30px 20px;
+      }
+
+      .controls-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+      }
+
+      .search-section {
+        max-width: none;
+      }
+
+      .filter-section {
+        justify-content: center;
+      }
+
+      .products-section {
+        padding: 40px 20px;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .products-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .shop-hero h1 {
+        font-size: 2rem;
+      }
+
+      .shop-hero {
+        padding: 60px 20px;
+      }
+
+      .shop-controls {
+        padding: 25px 15px;
+      }
+
+      .products-section {
+        padding: 30px 15px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .product-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Header -->
+  <!-- Navigation Bar -->
   <header class="main-header">
     <div class="logo">COLD</div>
     <nav class="main-nav">
@@ -17,37 +433,66 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="about.html">About</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="cart.html" id="cart-icon">Cart 🛒 (0)</a></li>
+        <li><a href="cart.html" id="cart-icon">Cart 🛒</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Product Detail Section -->
-  <section class="product-detail">
-    <div class="product-image">
-      <img src="anya white TEE.jpg" alt="White COLD Tee" />
+  <!-- Hero Section -->
+  <section class="shop-hero">
+    <h1>Shop COLD</h1>
+    <p>Premium gymwear designed for athletes who refuse to quit. Discover our latest collection of performance-driven apparel.</p>
+  </section>
+
+  <!-- Shop Controls -->
+  <section class="shop-controls">
+    <div class="controls-container">
+      <div class="search-section">
+        <input 
+          type="text" 
+          class="search-input" 
+          id="search-input" 
+          placeholder="Search products..."
+        />
+      </div>
+      
+      <div class="filter-section">
+        <label class="filter-label">Category:</label>
+        <select class="filter-select" id="category-filter">
+          <option value="all">All Products</option>
+          <option value="tees">Tees</option>
+          <option value="hoodies">Hoodies</option>
+          <option value="accessories">Accessories</option>
+        </select>
+        
+        <label class="filter-label">Sort:</label>
+        <select class="filter-select" id="sort-filter">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="newest">Newest First</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products-section">
+    <div class="products-header">
+      <h2 class="products-title">All Products</h2>
+      <span class="products-count" id="products-count">0 products</span>
     </div>
 
-    <div class="product-info" 
-         data-name="White COLD Tee"
-         data-price="999"
-         data-image="anya white TEE.jpg">
-      <h1>White COLD Tee</h1>
-      <p class="product-price">₹999</p>
-      <p class="product-description">Crisp. Bold. Clean. The White Tee from COLD makes a powerful statement in subtle fashion. Drop limited.</p>
+    <div id="products-grid" class="products-grid">
+      <!-- Products will be dynamically populated -->
+    </div>
 
-      <div class="size-select">
-        <label>Select Size:</label>
-        <button>S</button>
-        <button>M</button>
-        <button>L</button>
-        <button>XL</button>
-      </div>
-
-      <button class="btn add-to-cart">Add to Cart</button>
-      <button class="btn buy-now">Buy Now</button>
-      <a href="shop.html" class="back-link">← Back to Shop</a>
+    <div class="load-more">
+      <button class="load-more-btn" id="load-more-btn" style="display: none;">
+        Load More Products
+      </button>
     </div>
   </section>
 
@@ -56,8 +501,229 @@
     <p>© 2025 COLD. All rights reserved.</p>
   </footer>
 
-  <!-- JS -->
   <script>
+    // Product data
+    const products = [
+      {
+        id: 1,
+        name: "Black COLD Tee",
+        description: "Premium performance tee with moisture-wicking technology",
+        price: 999,
+        category: "tees",
+        image: "anya black TEE.jpg",
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: 2,
+        name: "White COLD Tee",
+        description: "Classic white tee with COLD branding and comfort fit",
+        price: 999,
+        category: "tees",
+        image: "anya white TEE.jpg",
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: 3,
+        name: "Premium COLD Hoodie",
+        description: "Heavy-duty hoodie perfect for cold weather training",
+        price: 1499,
+        category: "hoodies",
+        image: "anya black TEE.jpg",
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: 4,
+        name: "COLD Performance Shorts",
+        description: "Lightweight shorts designed for maximum mobility",
+        price: 799,
+        category: "accessories",
+        image: "anya white TEE.jpg",
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: 5,
+        name: "COLD Training Pants",
+        description: "Flexible training pants with stretch technology",
+        price: 1299,
+        category: "accessories",
+        image: "anya black TEE.jpg",
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: 6,
+        name: "COLD Gym Bag",
+        description: "Spacious gym bag with multiple compartments",
+        price: 899,
+        category: "accessories",
+        image: "anya white TEE.jpg",
+        sizes: ["One Size"]
+      }
+    ];
+
+    let filteredProducts = [...products];
+    let displayedProducts = 6;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function updateCartCount() {
+      const cartIcon = document.getElementById("cart-icon");
+      const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      if (cartIcon) {
+        cartIcon.textContent = `Cart \ud83d\uded2 (${totalQuantity})`;
+      }
+    }
+
+    function displayProducts() {
+      const productsGrid = document.getElementById("products-grid");
+      const productsCount = document.getElementById("products-count");
+      const loadMoreBtn = document.getElementById("load-more-btn");
+      
+      const productsToShow = filteredProducts.slice(0, displayedProducts);
+      
+      productsCount.textContent = `${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`;
+      
+      if (filteredProducts.length === 0) {
+        productsGrid.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <div class="no-results-title">No products found</div>
+            <div class="no-results-text">Try adjusting your search or filter criteria</div>
+            <button class="clear-search-btn" onclick="clearSearch()">Clear Search</button>
+          </div>
+        `;
+        loadMoreBtn.style.display = "none";
+        return;
+      }
+      
+      let productsHTML = '';
+      
+      productsToShow.forEach(product => {
+        productsHTML += `
+          <div class="product-card">
+            <div class="product-image-container">
+              <img src="${product.image}" alt="${product.name}" class="product-image" />
+              <div class="product-overlay">
+                <button class="quick-view-btn" onclick="quickView(${product.id})">
+                  Quick View
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">${product.name}</h3>
+              <p class="product-description">${product.description}</p>
+              <div class="product-price">₹${product.price}</div>
+              <div class="product-actions">
+                <button class="btn-primary" onclick="addToCart(${product.id})">
+                  Add to Cart
+                </button>
+                <button class="btn-secondary" onclick="viewDetails(${product.id})">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      productsGrid.innerHTML = productsHTML;
+      
+      // Show/hide load more button
+      if (displayedProducts < filteredProducts.length) {
+        loadMoreBtn.style.display = "block";
+      } else {
+        loadMoreBtn.style.display = "none";
+      }
+    }
+
+    function filterProducts() {
+      const searchTerm = document.getElementById("search-input").value.toLowerCase();
+      const categoryFilter = document.getElementById("category-filter").value;
+      const sortFilter = document.getElementById("sort-filter").value;
+      
+      filteredProducts = products.filter(product => {
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                            product.description.toLowerCase().includes(searchTerm);
+        const matchesCategory = categoryFilter === "all" || product.category === categoryFilter;
+        
+        return matchesSearch && matchesCategory;
+      });
+      
+      // Sort products
+      switch (sortFilter) {
+        case "price-low":
+          filteredProducts.sort((a, b) => a.price - b.price);
+          break;
+        case "price-high":
+          filteredProducts.sort((a, b) => b.price - a.price);
+          break;
+        case "newest":
+          filteredProducts.sort((a, b) => b.id - a.id);
+          break;
+        default:
+          // Featured order (keep original order)
+          break;
+      }
+      
+      displayedProducts = 6;
+      displayProducts();
+    }
+
+    function clearSearch() {
+      document.getElementById("search-input").value = "";
+      document.getElementById("category-filter").value = "all";
+      document.getElementById("sort-filter").value = "featured";
+      filterProducts();
+    }
+
+    function loadMore() {
+      displayedProducts += 6;
+      displayProducts();
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+          existingItem.quantity = (existingItem.quantity || 1) + 1;
+        } else {
+          cart.push({
+            ...product,
+            quantity: 1,
+            size: product.sizes[0]
+          });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        
+        // Show success feedback
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = "Added!";
+        btn.style.background = "#28a745";
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = "";
+        }, 1500);
+      }
+    }
+
+    function quickView(productId) {
+      // Implement quick view modal functionality
+      alert("Quick view feature coming soon!");
+    }
+
+    function viewDetails(productId) {
+      // Navigate to product detail page
+      window.location.href = `product-${productId}.html`;
+    }
+
+    // Event listeners
+    document.getElementById("search-input").addEventListener("input", filterProducts);
+    document.getElementById("category-filter").addEventListener("change", filterProducts);
+    document.getElementById("sort-filter").addEventListener("change", filterProducts);
+    document.getElementById("load-more-btn").addEventListener("click", loadMore);
+
     // Mobile nav toggle
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
@@ -65,73 +731,10 @@
       navLinks.classList.toggle('active');
     });
 
-    // Add to Cart Logic
-    const productInfo = document.querySelector(".product-info");
-    const name = productInfo.dataset.name;
-    const price = parseInt(productInfo.dataset.price);
-    const image = productInfo.dataset.image;
-
-    document.querySelector(".add-to-cart").addEventListener("click", () => {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ name, price, image });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${name} added to cart!`);
-      updateCartCount();
-    });
-
-    // Buy Now Logic
-    document.querySelector(".buy-now").addEventListener("click", () => {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ name, price, image });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      window.location.href = "checkout.html";
-    });
-
-    // Cart Count Update
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const cartIcon = document.getElementById("cart-icon");
-      if (cartIcon) {
-        cartIcon.textContent = `Cart 🛒 (${cart.length})`;
-      }
-    }
-
+    // Initialize
     updateCartCount();
+    displayProducts();
   </script>
-  <script>
-  // Make size buttons selectable
-  const sizeButtons = document.querySelectorAll(".size-select button");
-  let selectedSize = null;
-
-  sizeButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      sizeButtons.forEach(btn => btn.classList.remove("selected"));
-      button.classList.add("selected");
-      selectedSize = button.textContent;
-    });
-  });
-
-  // Modify Add to Cart to include size
-  document.querySelector(".add-to-cart").addEventListener("click", () => {
-    const productInfo = document.querySelector(".product-info");
-    const name = productInfo.dataset.name;
-    const price = parseInt(productInfo.dataset.price);
-    const image = productInfo.dataset.image;
-
-    if (!selectedSize) {
-      alert("Please select a size before adding to cart.");
-      return;
-    }
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push({ name, price, image, size: selectedSize });
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    alert(`${name} (${selectedSize}) added to cart!`);
-    updateCartCount();
-  });
-</script>
-
 </body>
 </html>
 

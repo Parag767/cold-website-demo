@@ -3,83 +3,289 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>COLD – Gymwear</title>
+  <!--  --><title>COLD – Gymwear</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Splash Screen Styles */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease-out;
+    }
+    
+    .splash-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    
+    .logo-container {
+      height: 200px;
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-image {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1.5s ease-out;
+    }
+    
+    .brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 100px;
+      font-weight: 400;
+      color: #FFFFFF;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      line-height: 1;
+      opacity: 0;
+      animation: fadeInText 1s ease-out 0.5s forwards;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .main-content {
+      opacity: 0;
+      transition: opacity 0.8s ease-in;
+    }
+    
+    .main-content.visible {
+      opacity: 1;
+    }
+    
+    /* Hide main content initially */
+    .main-content {
+      display: none;
+    }
+    
+    .main-content.visible {
+      display: block;
+    }
+    
+    /* Responsive design using vw units */
+    @media (max-width: 1200px) {
+      .logo-container {
+        height: 16vw;
+      }
+      .brand-name {
+        font-size: 8vw;
+        height: 8vw;
+        letter-spacing: 0.15vw;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .logo-container {
+        height: 20vw;
+      }
+      .brand-name {
+        font-size: 10vw;
+        height: 10vw;
+        letter-spacing: 0.2vw;
+      }
+      .splash-content {
+        gap: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .logo-container {
+        height: 24vw;
+      }
+      .brand-name {
+        font-size: 12vw;
+        height: 12vw;
+        letter-spacing: 0.25vw;
+      }
+      .splash-content {
+        gap: 1rem;
+      }
+    }
+    
+    /* Ensure minimum sizes on very large screens */
+    @media (min-width: 1400px) {
+      .logo-container {
+        height: 200px;
+      }
+      .brand-name {
+        font-size: 100px;
+        height: 100px;
+        letter-spacing: 0.2em;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <header class="main-header">
-    <div class="logo">COLD</div>
-    <nav class="main-nav">
-      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
-      <ul id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="athletes.html">Athletes</a></li>
-        <li><a href="cart.html" id="cart-icon">Cart 🛒</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Search Bar -->
-  <div class="nav-search">
-    <input type="text" id="search-input" placeholder="Search our products..." />
-    <button class="search-btn">🔍</button>
+  <!-- Splash Screen -->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-content">
+      <div class="logo-container">
+        <img id="logo-image" class="logo-image" src="logo.png.png" alt="COLD Logo" />
+      </div>
+      <div class="brand-name">COLD</div>
+    </div>
   </div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Crafted for the Cold.<br>Worn by the Relentless.</h1>
-    <a href="shop.html" class="cta-btn">Shop Now</a>
-  </section>
+  <!-- Main Website Content -->
+  <div id="main-content" class="main-content">
 
-  <!-- Featured Products -->
-  <section class="featured-products">
-    <h2>Featured Drops</h2>
-    <div class="product-grid">
-      <div class="product-card" data-name="black cold tee anya black">
-        <div class="tag-badge">LIMITED DROP</div>
-        <img src="anya black TEE.jpg" alt="Black COLD Tee" />
-        <h3>Black COLD Tee</h3>
-        <p>₹999</p>
-        <div class="product-buttons">
-          <a href="#" class="btn buy-now">Buy Now</a>
-          <a href="product-black.html" class="btn view-details">View Details</a>
-        </div>
-      </div>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+      <div class="logo">COLD</div>
+      <nav class="main-nav">
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <ul id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="athletes.html">Athletes</a></li>
+          <li><a href="cart.html" id="cart-icon">Cart 🛒</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <div class="product-card" data-name="white cold tee anya white">
-        <div class="tag-badge">LIMITED DROP</div>
-        <img src="anya white TEE.jpg" alt="White COLD Tee" />
-        <h3>White COLD Tee</h3>
-        <p>₹999</p>
-        <div class="product-buttons">
-          <a href="#" class="btn buy-now">Buy Now</a>
-          <a href="product-white.html" class="btn view-details">View Details</a>
-        </div>
-      </div>
+    <!-- Search Bar -->
+    <div class="nav-search">
+      <input type="text" id="search-input" placeholder="Search our products..." />
+      <button class="search-btn">🔍</button>
     </div>
-  </section>
 
-  <!-- Athletes Preview -->
-  <section class="athlete-preview">
-    <h2>The Movement</h2>
-    <button class="join-btn">JOIN US</button>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Crafted for the Cold.<br>Worn by the Relentless.</h1>
+      <a href="shop.html" class="cta-btn">Shop Now</a>
+    </section>
 
-  <!-- About Teaser -->
-  <section class="about-teaser">
-    <p>We’re more than apparel. We’re COLD.</p>
-    <a href="about.html">Read Our Story</a>
-  </section>
+    <!-- Featured Products -->
+    <section class="featured-products">
+      <h2>Featured Drops</h2>
+      <div class="product-grid">
+        <div class="product-card" data-name="black cold tee anya black">
+          <div class="tag-badge">LIMITED DROP</div>
+          <img src="anya black TEE.jpg" alt="Black COLD Tee" />
+          <h3>Black COLD Tee</h3>
+          <p>₹999</p>
+          <div class="product-buttons">
+            <a href="#" class="btn buy-now">Buy Now</a>
+            <a href="product-black.html" class="btn view-details">View Details</a>
+          </div>
+        </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 COLD. All rights reserved.</p>
-  </footer>
+        <div class="product-card" data-name="white cold tee anya white">
+          <div class="tag-badge">LIMITED DROP</div>
+          <img src="anya white TEE.jpg" alt="White COLD Tee" />
+          <h3>White COLD Tee</h3>
+          <p>₹999</p>
+          <div class="product-buttons">
+            <a href="#" class="btn buy-now">Buy Now</a>
+            <a href="product-white.html" class="btn view-details">View Details</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Athletes Preview -->
+    <section class="athlete-preview">
+      <h2>The Movement</h2>
+      <button class="join-btn">JOIN US</button>
+    </section>
+
+    <!-- About Teaser -->
+    <section class="about-teaser">
+      <p>We're more than apparel. We're COLD.</p>
+      <a href="about.html">Read Our Story</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 COLD. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Splash Screen JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const splashScreen = document.getElementById('splash-screen');
+      const mainContent = document.getElementById('main-content');
+      const logoImage = document.getElementById('logo-image');
+      
+      // Check if intro has already been shown
+      const introShown = localStorage.getItem('cold-intro-shown');
+      
+      if (!introShown) {
+        // Show splash screen first
+        splashScreen.style.display = 'flex';
+        mainContent.style.display = 'none';
+        
+        // Start logo animation
+        setTimeout(() => {
+          logoImage.style.opacity = '1';
+          logoImage.style.transform = 'scale(1)';
+        }, 100);
+        
+        // Mark intro as shown
+        localStorage.setItem('cold-intro-shown', 'true');
+        
+        // After 3 seconds, transition to main content
+        setTimeout(() => {
+          // Fade out splash screen
+          splashScreen.style.opacity = '0';
+          
+          // After splash fades out, show main content
+          setTimeout(() => {
+            splashScreen.style.display = 'none';
+            mainContent.style.display = 'block';
+            
+            // Fade in main content
+            setTimeout(() => {
+              mainContent.classList.add('visible');
+            }, 50);
+          }, 800);
+        }, 3000);
+        
+      } else {
+        // Intro already shown, go directly to main content
+        splashScreen.style.display = 'none';
+        mainContent.style.display = 'block';
+        mainContent.classList.add('visible');
+      }
+    });
+  </script>
 
   <!-- JS for Toggle Menu -->
   <script>
@@ -95,8 +301,9 @@
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       const cartIcon = document.getElementById("cart-icon");
+      const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
       if (cartIcon) {
-        cartIcon.textContent = `Cart 🛒 (${cart.length})`;
+        cartIcon.textContent = `Cart 🛒 (${totalQuantity})`;
       }
     }
     updateCartCount();
