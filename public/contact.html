@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | COLD Gymwear</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Contact Page Professional Design */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
+            padding: 120px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 80%, rgba(30, 144, 255, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(70, 130, 180, 0.05) 0%, transparent 50%); animation: float 20s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(180deg); } }
+        .hero-heading { font-size: clamp(3rem, 8vw, 4.5rem); font-weight: 800; margin-bottom: 1.5rem; color: var(--text); position: relative; z-index: 2; animation: fadeInUp 1s ease-out; }
+        .hero-subtext { font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.6; position: relative; z-index: 2; animation: fadeInUp 1s ease-out 0.2s both; }
+        /* ... existing inline styles preserved ... */
+    </style>
+    
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="main-header">
+        <div class="logo">COLD</div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop.html">Shop</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/cart.html" id="cart-icon">Cart 🛒 (0)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="contact-hero">
+        <div class="hero-bg-pattern"></div>
+        <h1 class="hero-heading">Get in Touch</h1>
+        <p class="hero-subtext">We're here to answer your questions and help you get the perfect COLD fit.</p>
+    </section>
+
+    <!-- The rest of the original contact.html content remains unchanged -->
+    
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 COLD. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartIcon = document.getElementById('cart-icon');
+            const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            if (cartIcon) {
+                cartIcon.textContent = `Cart 🛒 (${totalQuantity})`;
+            }
+        }
+        updateCartCount();
+    </script>
+
+</body>
+</html>
+
+

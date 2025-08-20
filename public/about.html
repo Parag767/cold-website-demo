@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – COLD</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* About Page Redesign */
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+    .about-hero { min-height: 90vh; background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-bg-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 80%, rgba(0, 188, 212, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0, 188, 212, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(0, 188, 212, 0.05) 0%, transparent 50%); }
+    .hero-content { text-align: center; max-width: 900px; padding: 0 30px; z-index: 2; position: relative; }
+    .hero-badge { display: inline-block; background: linear-gradient(45deg, #00bcd4, #0097a7); color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; margin-bottom: 2rem; opacity: 0; animation: slideInUp 0.8s ease-out 0.2s forwards; }
+    .hero-headline { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(45deg, #ffffff, #e0e0e0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0; animation: slideInUp 0.8s ease-out 0.4s forwards; }
+    .hero-subtext { font-size: clamp(1.1rem, 3vw, 1.3rem); font-weight: 300; color: #b0b0b0; max-width: 700px; margin: 0 auto; opacity: 0; animation: slideInUp 0.8s ease-out 0.6s forwards; }
+    .mission-section { padding: 120px 0; background: var(--bg); position: relative; }
+    .mission-container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mission-content h2 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 700; margin-bottom: 2rem; color: var(--text); }
+    .mission-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8; }
+    .mission-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .stat-item { text-align: center; }
+    .stat-number { font-size: 2.5rem; font-weight: 800; color: #00bcd4; margin-bottom: 0.5rem; }
+    .stat-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .mission-visual { position: relative; height: 500px; background: linear-gradient(135deg, #00bcd4, #0097a7); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .mission-visual::before { content: '🏋️‍♂️'; font-size: 6rem; opacity: 0.9; }
+    .mission-visual::after { content: ''; position: absolute; top: 20px; right: 20px; width: 60px; height: 60px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; }
+    .values-section { padding: 120px 0; background: var(--surface); }
+    .values-container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-header h2 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; color: var(--text); }
+    .section-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+    .value-card { background: var(--surface-2); padding: 3rem 2rem; border-radius: 16px; border: 1px solid var(--border); transition: all 0.4s ease; position: relative; overflow: hidden; }
+    .value-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #00bcd4, #0097a7); transform: scaleX(0); transition: transform 0.4s ease; }
+    .value-card:hover::before { transform: scaleX(1); }
+    .value-card:hover { transform: translateY(-8px); border-color: #00bcd4; box-shadow: 0 20px 40px rgba(0, 188, 212, 0.15); }
+    .value-icon { width: 60px; height: 60px; background: linear-gradient(45deg, #00bcd4, #0097a7); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.5rem; color: white; }
+    .value-card h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--text); }
+    .value-card p { color: var(--text-muted); line-height: 1.7; }
+    .team-section { padding: 120px 0; background: var(--bg); }
+    .team-container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .team-card { text-align: center; transition: transform 0.3s ease; }
+    .team-card:hover { transform: translateY(-5px); }
+    .team-photo { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #00bcd4, #0097a7); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white; font-weight: 600; position: relative; }
+    .team-photo::after { content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border: 2px solid transparent; border-radius: 50%; background: linear-gradient(45deg, #00bcd4, #0097a7); z-index: -1; opacity: 0.3; }
+    .team-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
+    .team-role { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+    .cta-section { padding: 100px 0; background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); text-align: center; position: relative; overflow: hidden; }
+    .cta-bg-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 30% 70%, rgba(0, 188, 212, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(0, 188, 212, 0.1) 0%, transparent 50%); }
+    .cta-container { max-width: 800px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 2; }
+    .cta-content h2 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 700; margin-bottom: 1.5rem; color: var(--text); }
+    .cta-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: linear-gradient(45deg, #00bcd4, #0097a7); color: white; padding: 18px 40px; border-radius: 50px; font-weight: 600; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .cta-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s ease; }
+    .cta-btn:hover::before { left: 100%; }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0, 188, 212, 0.3); }
+    @keyframes slideInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @media (max-width: 768px) { .mission-grid { grid-template-columns: 1fr; gap: 3rem; } .mission-visual { height: 300px; order: -1; } .values-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: repeat(2, 1fr); } .mission-stats { grid-template-columns: 1fr; gap: 1.5rem; } .about-hero { min-height: 70vh; } }
+    @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } .mission-section, .values-section, .team-section, .cta-section { padding: 80px 0; } .hero-content, .mission-container, .values-container, .team-container, .cta-container { padding: 0 20px; } }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">COLD</div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/shop.html">Shop</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/cart.html" id="cart-icon">Cart 🛒</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="about-hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Our Story</div>
+      <h1 class="hero-headline">Not Just Gymwear.<br>A Movement.</h1>
+      <p class="hero-subtext">At COLD, we believe performance comes from discipline, not excuses. Our apparel is designed for athletes who refuse to quit, who push beyond limits, and who understand that greatness is built in the details.</p>
+    </div>
+  </section>
+
+  <section class="mission-section">
+    <div class="mission-container">
+      <div class="mission-grid">
+        <div class="mission-content">
+          <h2>How COLD Was Born</h2>
+          <p>COLD started with one mission — to redefine gymwear in India. We were tired of clothes that looked good but didn't perform, or gear that performed but didn't inspire. So we built COLD: premium, functional, and timeless apparel designed for athletes who push past limits.</p>
+          <p>Every piece is crafted with precision, tested in real conditions, and designed to move with you. Because when you're pushing your limits, your gear should be doing the same.</p>
+          <div class="mission-stats">
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Performance Focused</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Athlete Support</div>
+            </div>
+          </div>
+        </div>
+        <div class="mission-visual"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <div class="values-container">
+      <div class="section-header">
+        <h2>Our Core Values</h2>
+        <p>The principles that drive every decision we make, every product we create, and every athlete we serve.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card fade-in">
+          <div class="value-icon"><i class="fas fa-bolt"></i></div>
+          <h3>Performance First</h3>
+          <p>Every stitch, every fabric, every design decision is made with athletic performance in mind. We don't compromise on functionality for fashion.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-icon"><i class="fas fa-palette"></i></div>
+          <h3>Minimal Design</h3>
+          <p>Clean lines, timeless aesthetics, and purposeful design that never goes out of style. Less is more, and more is powerful.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-icon"><i class="fas fa-running"></i></div>
+          <h3>Athlete Driven</h3>
+          <p>Built by athletes, for athletes. We understand what you need because we've been there, pushing limits and breaking barriers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="team-container">
+      <div class="section-header">
+        <h2>The People Behind the Brand</h2>
+        <p>Meet the team that's redefining what gymwear means in India.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card fade-in"><div class="team-photo">H</div><h3 class="team-name">Harshada</h3><p class="team-role">Founder & Product Head</p></div>
+        <div class="team-card fade-in"><div class="team-photo">P</div><h3 class="team-name">Parag</h3><p class="team-role">Operations & Strategy</p></div>
+        <div class="team-card fade-in"><div class="team-photo">P</div><h3 class="team-name">Parth</h3><p class="team-role">Athlete Scouting & Content</p></div>
+        <div class="team-card fade-in"><div class="team-photo">A</div><h3 class="team-name">Aniruddha</h3><p class="team-role">Athlete Scouting & Storytelling</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-bg-pattern"></div>
+    <div class="cta-container">
+      <div class="cta-content">
+        <h2>Join the COLD Movement</h2>
+        <p>Ready to experience gymwear that performs as hard as you do? Discover our collection and become part of the movement.</p>
+        <a href="/shop.html" class="cta-btn">Shop Now</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 COLD. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartIcon = document.getElementById('cart-icon');
+      const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      if (cartIcon) {
+        cartIcon.textContent = `Cart 🛒 (${totalQuantity})`;
+      }
+    }
+    updateCartCount();
+    function handleScrollAnimations() {
+      const elements = document.querySelectorAll('.fade-in');
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScrollAnimations);
+    window.addEventListener('load', handleScrollAnimations);
+  </script>
+</body>
+</html>
+
+

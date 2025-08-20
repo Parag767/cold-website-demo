@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--  --><title>COLD – Gymwear</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
   <style>
     /* Splash Screen Styles */
     .splash-screen {
@@ -153,7 +153,7 @@
   <div id="splash-screen" class="splash-screen">
     <div class="splash-content">
       <div class="logo-container">
-        <img id="logo-image" class="logo-image" src="logo.png.png" alt="COLD Logo" />
+        <img id="logo-image" class="logo-image" src="/logo.png.png" alt="COLD Logo" />
       </div>
       <div class="brand-name">COLD</div>
     </div>
@@ -168,12 +168,12 @@
       <nav class="main-nav">
         <div class="menu-toggle" id="menu-toggle">&#9776;</div>
         <ul id="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="athletes.html">Athletes</a></li>
-          <li><a href="cart.html" id="cart-icon">Cart 🛒</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/shop.html">Shop</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/athletes.html">Athletes</a></li>
+          <li><a href="/cart.html" id="cart-icon">Cart 🛒</a></li>
         </ul>
       </nav>
     </header>
@@ -187,7 +187,7 @@
     <!-- Hero Section -->
     <section class="hero">
       <h1>Crafted for the Cold.<br>Worn by the Relentless.</h1>
-      <a href="shop.html" class="cta-btn">Shop Now</a>
+      <a href="/shop.html" class="cta-btn">Shop Now</a>
     </section>
 
     <!-- Featured Products -->
@@ -196,23 +196,23 @@
       <div class="product-grid">
         <div class="product-card" data-name="black cold tee anya black">
           <div class="tag-badge">LIMITED DROP</div>
-          <img src="anya black TEE.jpg" alt="Black COLD Tee" />
+          <img src="/anya black TEE.jpg" alt="Black COLD Tee" />
           <h3>Black COLD Tee</h3>
           <p>₹999</p>
           <div class="product-buttons">
             <a href="#" class="btn buy-now">Buy Now</a>
-            <a href="product-black.html" class="btn view-details">View Details</a>
+            <a href="/product-black.html" class="btn view-details">View Details</a>
           </div>
         </div>
 
         <div class="product-card" data-name="white cold tee anya white">
           <div class="tag-badge">LIMITED DROP</div>
-          <img src="anya white TEE.jpg" alt="White COLD Tee" />
+          <img src="/anya white TEE.jpg" alt="White COLD Tee" />
           <h3>White COLD Tee</h3>
           <p>₹999</p>
           <div class="product-buttons">
             <a href="#" class="btn buy-now">Buy Now</a>
-            <a href="product-white.html" class="btn view-details">View Details</a>
+            <a href="/product-white.html" class="btn view-details">View Details</a>
           </div>
         </div>
       </div>
@@ -227,7 +227,7 @@
     <!-- About Teaser -->
     <section class="about-teaser">
       <p>We're more than apparel. We're COLD.</p>
-      <a href="about.html">Read Our Story</a>
+      <a href="/about.html">Read Our Story</a>
     </section>
 
     <!-- Footer -->
@@ -338,7 +338,7 @@
           }
           localStorage.setItem('cart', JSON.stringify(cart));
 
-          window.location.href = 'checkout.html';
+          window.location.href = '/checkout.html';
         });
       });
     })();
@@ -346,3 +346,5 @@
 
 </body>
 </html>
+
+

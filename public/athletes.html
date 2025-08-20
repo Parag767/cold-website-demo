@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Athletes – COLD</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .athletes-hero{ text-align:center; padding:80px 20px; background:linear-gradient(180deg,#101010 0%,#262626 100%); color:#fff; border-bottom:1px solid #222; }
+    .athletes-hero h1{ font-size:3rem; margin-bottom:20px; text-shadow:2px 2px #000; letter-spacing:1px; }
+    .athletes-hero p{ font-size:1.2rem; color:#ccc; max-width:600px; margin:0 auto; line-height:1.6; }
+    .athletes-section{ padding:60px 20px; background:var(--surface); }
+    .section-title{ font-size:2rem; text-align:center; margin-bottom:40px; letter-spacing:.5px; font-weight:600; }
+    .athletes-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; max-width:1200px; margin:0 auto; }
+    .athlete-card{ background:var(--surface-2); border-radius:12px; overflow:hidden; box-shadow:0 0 10px #000; transition:transform .3s; }
+    .athlete-card:hover{ transform:scale(1.02); }
+    .athlete-image-container{ height:300px; overflow:hidden; background:var(--surface-3); }
+    .athlete-image{ width:100%; height:100%; object-fit:cover; }
+    .athlete-info{ padding:20px; }
+    .athlete-name{ font-size:1.5rem; font-weight:600; margin-bottom:15px; color:var(--text); }
+    .athlete-description{ color:var(--text-muted); line-height:1.6; margin-bottom:20px; }
+    .athlete-stats{ display:flex; gap:20px; margin-bottom:20px; }
+    .stat-item{ text-align:center; }
+    .stat-number{ font-size:1.3rem; font-weight:600; color:var(--accent); margin-bottom:5px; }
+    .stat-label{ font-size:.9rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; }
+    .instagram-link{ display:inline-block; padding:10px 20px; background:var(--accent); color:#111; border-radius:20px; font-weight:bold; text-decoration:none; transition:background .3s; }
+    .instagram-link:hover{ background:var(--accent-hover); }
+    .together-section{ padding:60px 20px; background:var(--bg); text-align:center; }
+    .together-title{ font-size:2rem; margin-bottom:30px; letter-spacing:.5px; font-weight:600; }
+    .together-image-container{ max-width:800px; margin:0 auto 20px; border-radius:12px; overflow:hidden; box-shadow:0 0 10px #000; transition:transform .3s; }
+    .together-image-container:hover{ transform:scale(1.02); }
+    .together-image{ width:100%; height:auto; display:block; }
+    .together-caption{ font-size:1.1rem; color:var(--text-muted); font-style:italic; line-height:1.6; }
+    .cta-section{ padding:60px 20px; background:var(--surface); text-align:center; }
+    .cta-title{ font-size:2rem; margin-bottom:20px; letter-spacing:.5px; font-weight:600; }
+    .cta-text{ font-size:1.1rem; color:var(--text-muted); margin-bottom:30px; line-height:1.6; max-width:600px; margin-left:auto; margin-right:auto; }
+    .join-team-btn{ padding:12px 28px; background:var(--accent); color:#111; border:none; border-radius:30px; font-weight:bold; font-size:1rem; text-decoration:none; display:inline-block; transition:background .3s; }
+    .join-team-btn:hover{ background:var(--accent-hover); }
+    @media(max-width:768px){ .athletes-hero h1{ font-size:2.5rem } .athletes-grid{ grid-template-columns:1fr; gap:20px } .athlete-image-container{ height:250px } .athlete-stats{ flex-direction:column; gap:15px } .together-image-container{ margin:0 10px 20px } }
+    @media(max-width:480px){ .athletes-hero h1{ font-size:2rem } .athletes-hero{ padding:60px 20px } .athletes-section,.together-section,.cta-section{ padding:40px 20px } }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">COLD</div>
+    <nav class="main-nav">
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <ul id="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/shop.html">Shop</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/athletes.html">Athletes</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/cart.html" id="cart-icon">Cart 🛒</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="athletes-hero">
+    <h1>Meet the Athletes of COLD</h1>
+    <p>Strength. Style. Dedication. The faces behind COLD.</p>
+  </section>
+
+  <section class="athletes-section">
+    <h2 class="section-title">The Team</h2>
+    <div class="athletes-grid">
+      <div class="athlete-card">
+        <div class="athlete-image-container">
+          <img src="/anya black TEE.jpg" alt="Parth - COLD Athlete" class="athlete-image" />
+        </div>
+        <div class="athlete-info">
+          <h3 class="athlete-name">Parth</h3>
+          <p class="athlete-description">A dedicated athlete with an unbreakable spirit. Parth embodies the COLD mentality through his relentless training and commitment to excellence. His passion for fitness drives innovation in our product development.</p>
+          <div class="athlete-stats">
+            <div class="stat-item"><div class="stat-number">5+</div><div class="stat-label">Years Training</div></div>
+            <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Dedication</div></div>
+          </div>
+          <a href="https://instagram.com/parth_cold" target="_blank" class="instagram-link">Follow Parth</a>
+        </div>
+      </div>
+      <div class="athlete-card">
+        <div class="athlete-image-container">
+          <img src="/anya white TEE.jpg" alt="Aniruddha - COLD Athlete" class="athlete-image" />
+        </div>
+        <div class="athlete-info">
+          <h3 class="athlete-name">Aniruddha</h3>
+          <p class="athlete-description">A natural leader and fitness enthusiast who pushes boundaries every day. Aniruddha's innovative approach to training and his commitment to helping others achieve their goals makes him a perfect ambassador for COLD.</p>
+          <div class="athlete-stats">
+            <div class="stat-item"><div class="stat-number">7+</div><div class="stat-label">Years Experience</div></div>
+            <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">Potential</div></div>
+          </div>
+          <a href="https://instagram.com/aniruddha_cold" target="_blank" class="instagram-link">Follow Aniruddha</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="together-section">
+    <h2 class="together-title">Building Together</h2>
+    <div class="together-image-container">
+      <img src="/parth and anya.JPG" alt="Parth and Aniruddha together" class="together-image" />
+    </div>
+    <p class="together-caption">"Bonded by strength, building COLD together."</p>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="cta-title">Think you've got what it takes to be a COLD Athlete?</h2>
+    <p class="cta-text">Join our team of dedicated athletes who are shaping the future of premium gymwear. If you're ready to push your limits and represent the COLD brand, we want to hear from you.</p>
+    <a href="join.html" class="join-team-btn">Join the Team</a>
+  </section>
+
+  <footer>
+    <p>© 2025 COLD. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const menuToggle=document.getElementById('menu-toggle'); const navLinks=document.getElementById('nav-links'); menuToggle.addEventListener('click',()=>{ navLinks.classList.toggle('active'); });
+    function updateCartCount(){ const cart=JSON.parse(localStorage.getItem("cart"))||[]; const cartIcon=document.getElementById("cart-icon"); const totalQuantity=cart.reduce((s,i)=>s+(i.quantity||1),0); if(cartIcon){ cartIcon.textContent=`Cart 🛒 (${totalQuantity})`; } }
+    updateCartCount();
+  </script>
+</body>
+</html>
+
+

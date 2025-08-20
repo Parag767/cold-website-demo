@@ -714,8 +714,17 @@
     }
 
     function viewDetails(productId) {
-      // Navigate to product detail page
-      window.location.href = `product-${productId}.html`;
+      // Navigate to existing product detail pages
+      switch (productId) {
+        case 1:
+          window.location.href = 'product-black.html';
+          break;
+        case 2:
+          window.location.href = 'product-white.html';
+          break;
+        default:
+          alert('Detailed page coming soon for this product.');
+      }
     }
 
     // Event listeners
